@@ -10,4 +10,7 @@ const router = express.Router()
 // 更新目录树
 router.get('/updateDirectoryTree', updateDataHandler.updateDirectoryTree)
 
+// 从github更新文章
+router.post('/webhook', updateDataHandler.webHookPapersFile)
+
 module.exports = router

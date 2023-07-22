@@ -94,7 +94,7 @@ exports.getFileList = async (req, res) => {
   })
 }
 
-// 
+// 浏览量
 exports.AddHits  = async (req, res) => {
   const path = req.query.path
   console.log(path)

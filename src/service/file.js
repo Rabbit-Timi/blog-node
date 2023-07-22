@@ -49,6 +49,7 @@ function modifyImgPath(data) {
 function getFileContent(fileName) {
   const url = `${PAPERS_PATH}/${fileName}`
 
+
   return new Promise(function (resolve, reject) {
     fs.readFile(url, function (err, data) {
       if (err) {
@@ -117,7 +118,9 @@ function getFileListByPath(path = ''){
 
 // 浏览量
 function addFilePageHits(path){
-  console.log('path:', path)
+  // console.log('path:', path)
+  // const cwd = process.cwd()
+  // console.log('cwd:',cwd)
   return new Promise(function (resolve, reject) {
     console.time('read')
     let data = fs.readFileSync(DIRECTORY_PATH)
