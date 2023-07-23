@@ -19,17 +19,6 @@ exports.updateDirectoryTree = async (req, res) => {
 
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
-  // await updatePapersFile().then(function (data) {
-  //   res.send({
-  //     errno: 0,
-  //     msg: data.msg
-  //   })
-  // }).catch(function (err) {
-  //   res.send({
-  //     errno: err.errno,
-  //     msg: '更新失败',
-  //   })
-  // })
   console.log(req.body) //一大串仓库push的信息，用它来计算动态签名
   const sign = req.headers['x-hub-signature']   //输出为：sha1=${secret的加密字符串}
   const event = req.headers['x-github-event']    //输出为：事件名称(push)
@@ -44,6 +33,7 @@ exports.webHookPapersFile = async (req, res) => {
       let cwd = process.cwd()
       runCmd('sh', [path.join(cwd,'scripts/pullClover.sh')], function(res){
         console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
+        saveDirectoryTree()
       });
     }
   }
