@@ -3,6 +3,7 @@ const cors = require('cors') // 将 cors 注册为全局中间件
 const fileRouter = require('./router/file')
 const updateData = require('./router/updateData')
 const { PAPERS_ILLUSTRATION_PATH, LOGO_PATH } = require('./constant/index.js')
+const {BASEURL} = require('./app/config.js')
 
 const app = express()
 
@@ -26,6 +27,6 @@ app.use('/illustration', express.static(PAPERS_ILLUSTRATION_PATH))
 app.use('/Logo', express.static(LOGO_PATH))
 
 const server = app.listen(80, () => {
-  console.log('Express server running at http://127.0.0.1')
+  console.log(BASEURL)
 })
 server.timeout = 5000

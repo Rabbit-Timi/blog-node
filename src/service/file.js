@@ -49,7 +49,7 @@ function modifyImgPath(data) {
 function getFileContent(fileName) {
   const url = `${PAPERS_PATH}/${fileName}`
 
-
+  console.log(url)
   return new Promise(function (resolve, reject) {
     fs.readFile(url, function (err, data) {
       if (err) {
