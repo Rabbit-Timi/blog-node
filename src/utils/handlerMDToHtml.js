@@ -1,4 +1,4 @@
-require("katex/contrib/mhchem");
+require('katex');
 const hljs = require('highlight.js'); 
 const katexOptions = { throwOnError: false, errorColor: 'red', output: 'mathml' }
 
