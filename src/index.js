@@ -26,7 +26,7 @@ app.use('/illustration', express.static(PAPERS_ILLUSTRATION_PATH))
 
 app.use('/Logo', express.static(LOGO_PATH))
 
-const server = app.listen(80, () => {
+const server = app.listen(8888, () => {
   console.log(BASEURL)
 })
 server.timeout = 5000

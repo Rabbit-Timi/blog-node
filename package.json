@@ -25,6 +25,7 @@
   "devDependencies": {
     "@types/katex": "^0.14.0",
     "@types/markdown-it": "^12.2.3",
+    "@typescript-eslint/parser": "^6.2.0",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
