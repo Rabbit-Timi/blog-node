@@ -47,7 +47,7 @@ function modifyImgPath(data) {
 
 // 读取文件内容
 function getFileContent(fileName) {
-  const url = `${PAPERS_PATH}/${fileName}`
+  const url = `${PAPERS_PATH}${fileName}`
 
   console.log(url)
   return new Promise(function (resolve, reject) {
