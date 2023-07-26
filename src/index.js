@@ -8,14 +8,14 @@ const {BASEURL} = require('./app/config.js')
 const app = express()
 
 // 路由请求超时的中间件
-app.use(function (req, res, next) {
-    // 这里必须是Response响应的定时器
-    res.setTimeout(5000, function () {
-        console.log("Request has timed out.")
-        return res.status(408).send("请求超时")
-    })
-    next()
-})
+// app.use(function (req, res, next) {
+//     // 这里必须是Response响应的定时器
+//     res.setTimeout(5000, function () {
+//         console.log("Request has timed out.")
+//         return res.status(408).send("请求超时")
+//     })
+//     next()
+// })
 
 app.use(cors())
 
@@ -29,4 +29,4 @@ app.use('/Logo', express.static(LOGO_PATH))
 const server = app.listen(8888, () => {
   console.log(BASEURL)
 })
-server.timeout = 5000
+server.timeout = 50000
