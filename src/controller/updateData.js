@@ -19,7 +19,14 @@ exports.updateDirectoryTree = async (req, res) => {
 
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
-  console.log('webHookPapersFile',req) //一大串仓库push的信息，用它来计算动态签名
+  console.log(req, 'webHookPapersFile',req.rawHeaders) //一大串仓库push的信息，用它来计算动态签名
+  const header = []
+  for(let i = 0; i < req.rawHeaders.length; i += 2){
+    header.push({
+      [req.rawHeaders[i]]: [req.rawHeaders[i + 1]]
+    })
+  }
+  console.log('header',header)
   // const sign = req.headers['x-hub-signature']   //输出为：sha1=${secret的加密字符串}
   // const event = req.headers['x-github-event']    //输出为：事件名称(push)
   // // const commitID = req.headers['x-github-delivery'] //输出为：commitID
