@@ -3,7 +3,7 @@
  * @Author: timmtiy
  * @Date: 2023-05-30 18:29:44
  * @LastEditors: timmtiy
- * @LastEditTime: 2023-07-21 09:46:10
+ * @LastEditTime: 2023-07-27 15:54:41
  */
 
 const { BASE_PATH } = require('../app/config.js')
@@ -17,6 +17,10 @@ exports.LOGO_PATH = `${BASE_PATH}/Logo`
 const base_path = __dirname.slice(0, __dirname.length - 8)
 exports.DIRECTORY_PATH = `${base_path}/data/directory.json`
 // exports.PAGE_HITS_PATH = `${base_path}/data/page_hits.json`
+
+
+// git webhook token
+exports.GIT_WEBHOOK_TOKEN = '318a1115ba5b1bb46ec4f984b4db6ec152c6b0fe'
 
 exports.CONTENT_TYPE = {
   css: 'text/css',

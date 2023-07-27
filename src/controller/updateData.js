@@ -1,4 +1,5 @@
 const { saveDirectoryTree, updatePapersFile } = require('../service/updateData')
+const {GIT_WEBHOOK_TOKEN} = require('../constant/index')
 const crypto = require('crypto')
 const path = require('path')
 
@@ -19,7 +20,7 @@ exports.updateDirectoryTree = async (req, res) => {
 
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
-  console.log(req) //一大串仓库push的信息，用它来计算动态签名
+  console.log(req, req.body) //一大串仓库push的信息，用它来计算动态签名
   let header = {}
   for(let i = 0; i < req.rawHeaders.length; i += 2){
     header = {
@@ -29,14 +30,12 @@ exports.webHookPapersFile = async (req, res) => {
       }
     }
   }
-  console.log('header',header)
   const sign = header['X-Hub-Signature']   //输出为：sha1=${secret的加密字符串}
   const event = header['X-GitHub-Event']    //输出为：事件名称(push)
   const commitID = header['X-GitHub-Delivery'] //输出为：commitID
-  console.log(event)
   if(event=='push'){
     // 根据请求的body和secret计算sha1的值
-    const hmac = crypto.createHmac('sha1','bilibili123456');
+    const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN);
     console.log(hmac)
     // hmac.update(new Buffer(JSON.stringify(req.body))); //req.body时github传过来的post数据(跟request.body一样的)
     // const signature = 'sha1=' + hmac.digest('hex'); //用这个跟sign对比
