@@ -19,7 +19,7 @@ exports.updateDirectoryTree = async (req, res) => {
 
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
-  // console.log(req, 'webHookPapersFile',req.rawHeaders) //一大串仓库push的信息，用它来计算动态签名
+  console.log(req) //一大串仓库push的信息，用它来计算动态签名
   let header = {}
   for(let i = 0; i < req.rawHeaders.length; i += 2){
     header = {
@@ -39,7 +39,7 @@ exports.webHookPapersFile = async (req, res) => {
     const hmac = crypto.createHmac('sha1','bilibili123456');
     console.log(hmac)
     // hmac.update(new Buffer(JSON.stringify(req.body))); //req.body时github传过来的post数据(跟request.body一样的)
-    const signature = 'sha1=' + hmac.digest('hex'); //用这个跟sign对比
+    // const signature = 'sha1=' + hmac.digest('hex'); //用这个跟sign对比
     // 可在此验证sign真伪
     // if(signature == sign){
     //   let cwd = process.cwd()
