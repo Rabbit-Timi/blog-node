@@ -17,12 +17,6 @@ const app = express()
 //     next()
 // })
 
-app.use(function (req, res, next) {
-    // 这里必须是Response响应的定时器
-    console.log(req)
-    next()
-})
-
 app.use(cors())
 
 app.use('/api', fileRouter)

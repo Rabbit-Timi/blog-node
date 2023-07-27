@@ -30,9 +30,9 @@ exports.getFile = async (req, res) => {
   const filePath = req.query.filePath
   // console.log(filePath)
   await getFileContent(filePath).then(function (data) {
-      console.time()
+      // console.time()
       const html = md.render(data);
-      console.timeEnd()
+      // console.timeEnd()
       // console.log('test_controller')
       res.send({
         errno: 0,
@@ -86,7 +86,7 @@ exports.getFileList = async (req, res) => {
       }
     })
   }).catch(function (err) {
-    console.log(err)
+    // console.log(err)
     res.send({
       errno: err.errno,
       msg: '文件缺失',
@@ -97,7 +97,7 @@ exports.getFileList = async (req, res) => {
 // 浏览量
 exports.AddHits  = async (req, res) => {
   const path = req.query.path
-  console.log(path)
+  // console.log(path)
   await addFilePageHits(path).then(function (data) {
     res.send({
       errno: 0,

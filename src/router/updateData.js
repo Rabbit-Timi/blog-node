@@ -11,6 +11,9 @@ const router = express.Router()
 router.get('/updateDirectoryTree', updateDataHandler.updateDirectoryTree)
 
 // 从github更新文章
-router.post('/webhook', updateDataHandler.webHookPapersFile)
+// router.post('/webhook', updateDataHandler.webHookPapersFile)
+router.post('/webhook', function (ctx, next) { // 这里的/url必须与配置Webhooks时填写的接口路径相同
+  console.log(ctx)
+})
 
 module.exports = router

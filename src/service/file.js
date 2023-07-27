@@ -49,7 +49,7 @@ function modifyImgPath(data) {
 function getFileContent(fileName) {
   const url = `${PAPERS_PATH}${fileName}`
 
-  console.log(url)
+  // console.log(url)
   return new Promise(function (resolve, reject) {
     fs.readFile(url, function (err, data) {
       if (err) {
@@ -122,9 +122,9 @@ function addFilePageHits(path){
   // const cwd = process.cwd()
   // console.log('cwd:',cwd)
   return new Promise(function (resolve, reject) {
-    console.time('read')
+    // console.time('read')
     let data = fs.readFileSync(DIRECTORY_PATH)
-    console.timeEnd('read')
+    // console.timeEnd('read')
     if(data) {
       data = JSON.parse(data)
         for(let i = 0; i < data.length; i++){
@@ -134,14 +134,14 @@ function addFilePageHits(path){
           }
         }
     }
-    console.time('write')
+    // console.time('write')
     fs.writeFile(DIRECTORY_PATH, JSON.stringify(data), function (err) {
       // console.log(err)
       if (err) {
         reject(err)
-        console.timeEnd('write')
+        // console.timeEnd('write')
       } else {
-        console.timeEnd('write')
+        // console.timeEnd('write')
         resolve({ msg: '更新成功' })
       }
     })
