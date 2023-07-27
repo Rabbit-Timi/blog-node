@@ -20,7 +20,7 @@ exports.updateDirectoryTree = async (req, res) => {
 
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
-  console.log(req.body) //一大串仓库push的信息，用它来计算动态签名
+  console.log(req.data) //一大串仓库push的信息，用它来计算动态签名
   let header = {}
   for(let i = 0; i < req.rawHeaders.length; i += 2){
     header = {
