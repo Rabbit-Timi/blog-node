@@ -20,11 +20,14 @@ exports.updateDirectoryTree = async (req, res) => {
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
   // console.log(req, 'webHookPapersFile',req.rawHeaders) //一大串仓库push的信息，用它来计算动态签名
-  const header = []
+  let header = {}
   for(let i = 0; i < req.rawHeaders.length; i += 2){
-    header.push({
-      [req.rawHeaders[i]]: req.rawHeaders[i + 1]
-    })
+    header = {
+      ...header,
+      ...{
+        [req.rawHeaders[i]]: req.rawHeaders[i + 1]
+      }
+    }
   }
   console.log('header',header)
   const sign = header['X-Hub-Signature']   //输出为：sha1=${secret的加密字符串}
