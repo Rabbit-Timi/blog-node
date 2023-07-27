@@ -30,6 +30,7 @@ exports.webHookPapersFile = async (req, res) => {
   const sign = header['X-Hub-Signature']   //输出为：sha1=${secret的加密字符串}
   const event = header['X-GitHub-Event']    //输出为：事件名称(push)
   const commitID = header['X-GitHub-Delivery'] //输出为：commitID
+  console.log(event)
   if(event=='push'){
     // 根据请求的body和secret计算sha1的值
     const hmac = crypto.createHmac('sha1','bilibili123456');
