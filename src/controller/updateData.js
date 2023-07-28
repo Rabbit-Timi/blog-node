@@ -30,13 +30,14 @@ exports.webHookPapersFile = async (req, res) => {
       }
     }
   }
-  const sign = header['X-Hub-Signature']   //输出为：sha1=${secret的加密字符串}
+  // const sign = header['X-Hub-Signature']   //输出为：sha1=${secret的加密字符串}
   const event = header['X-GitHub-Event']    //输出为：事件名称(push)
-  const commitID = header['X-GitHub-Delivery'] //输出为：commitID
+  // const commitID = header['X-GitHub-Delivery'] //输出为：commitID
+  // const hookID = header['X-GitHub-Hook-ID']
   if(event=='push'){
     // 根据请求的body和secret计算sha1的值
-    const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN);
-    console.log(hmac)
+    // const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN);
+    // console.log(hmac)
     // hmac.update(JSON.stringify(req.body)); //req.body时github传过来的post数据(跟request.body一样的)
     // const signature = 'sha1=' + hmac.digest('hex'); //用这个跟sign对比
     // 可在此验证sign真伪
@@ -47,6 +48,11 @@ exports.webHookPapersFile = async (req, res) => {
     //     saveDirectoryTree()
     //   });
     // }
+    let cwd = process.cwd()
+    runCmd('sh', [path.join(cwd,'scripts/pullClover.sh')], function(res){
+      console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
+      saveDirectoryTree()
+    });
   }
   res.send({
     errno: 0,
