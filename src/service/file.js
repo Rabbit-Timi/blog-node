@@ -13,7 +13,6 @@ function getSideDirectory() {
         data = JSON.parse(data)
         data.forEach(elem => {
           const pathArray = elem.filePath.split('/').filter(a => a != '')
-          // console.log(pathArray)
           if (pathArray.length === 1 && elem.type === 'directory') res.push(elem)
         })
         resolve(res)
@@ -49,7 +48,6 @@ function modifyImgPath(data) {
 function getFileContent(fileName) {
   const url = `${PAPERS_PATH}${fileName}`
 
-  // console.log(url)
   return new Promise(function (resolve, reject) {
     fs.readFile(url, function (err, data) {
       if (err) {
@@ -57,7 +55,6 @@ function getFileContent(fileName) {
       } else {
         data = data.toString()
         data = modifyImgPath(data)
-        // console.log('test_service')
         resolve(data)
       }
     })
@@ -95,7 +92,6 @@ function getTagsByPath(path) {
 
 // 读取文件列表
 function getFileListByPath(path = '') {
-  // console.log(path)
   return new Promise(function (resolve, reject) {
     fs.readFile(DIRECTORY_PATH, function (err, data) {
       data = JSON.parse(data)
@@ -118,33 +114,32 @@ function getFileListByPath(path = '') {
 
 // 浏览量
 function addFilePageHits(path) {
-  // console.log('path:', path)
-  // const cwd = process.cwd()
-  // console.log('cwd:',cwd)
   return new Promise(function (resolve, reject) {
-    // console.time('read')
-    let data = fs.readFileSync(DIRECTORY_PATH)
-    // console.timeEnd('read')
+    let data = fs.readFileSync(DIRECTORY_PATH, 'utf-8')
+    data = JSON.parse(data)
     if (data) {
-      data = JSON.parse(data)
       for (let i = 0; i < data.length; i++) {
         if (data[i].filePath === path) {
           data[i].hitsCount++
           break
         }
       }
+      // 查看文件夹是否可写
+      // fs.access(DIRECTORY_PATH, fs.constants.W_OK, err => {
+      //   console.log(`${DIRECTORY_PATH} ${err ? '不可写' : '可写'}`)
+      // })
+      data = JSON.stringify(data)
+      setTimeout(() => {
+        fs.writeFile(DIRECTORY_PATH, data, function (err) {
+          console.log(err)
+          if (err) {
+            reject(err)
+          } else {
+            resolve({ msg: '更新成功' })
+          }
+        })
+      }, 1000)
     }
-    // console.time('write')
-    fs.writeFile(DIRECTORY_PATH, JSON.stringify(data), function (err) {
-      // console.log(err)
-      if (err) {
-        reject(err)
-        // console.timeEnd('write')
-      } else {
-        // console.timeEnd('write')
-        resolve({ msg: '更新成功' })
-      }
-    })
   })
 }
 

@@ -9,10 +9,8 @@ function saveDirectoryTree() {
   const dir = []
   const res = []
   DFSDir(dir, PAPERS_PATH, res)
-  // console.log(dir)
   return new Promise(function (resolve, reject) {
     fs.writeFile(DIRECTORY_PATH, JSON.stringify(res), function (err) {
-      // console.log(err)
       if (err) {
         reject(err)
       } else {

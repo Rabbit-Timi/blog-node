@@ -29,13 +29,9 @@ exports.getSideDirectory = async (req, res) => {
 // 获取.md文件信息
 exports.getFile = async (req, res) => {
   const filePath = req.query.filePath
-  // console.log(filePath)
   await getFileContent(filePath)
     .then(function (data) {
-      // console.time()
       const html = md.render(data)
-      // console.timeEnd()
-      // console.log('test_controller')
       res.send({
         errno: 0,
         data: {
@@ -54,7 +50,6 @@ exports.getFile = async (req, res) => {
 // 读取Tags
 exports.getTags = async (req, res) => {
   const tag_path = req.query.path
-  // console.log(res)
   await getTagsByPath(tag_path)
     .then(function (data) {
       res.send({
@@ -83,7 +78,6 @@ exports.getFileList = async (req, res) => {
       const start = pageSize * (pageNum - 1)
       const end = pageSize * pageNum
       const list = fileList.slice(start, end)
-      // console.log(data, fileList)
       res.send({
         errno: 0,
         data: {
@@ -93,7 +87,6 @@ exports.getFileList = async (req, res) => {
       })
     })
     .catch(function (err) {
-      // console.log(err)
       res.send({
         errno: err.errno,
         msg: '文件缺失',
@@ -104,7 +97,6 @@ exports.getFileList = async (req, res) => {
 // 浏览量
 exports.AddHits = async (req, res) => {
   const path = req.query.path
-  // console.log(path)
   await addFilePageHits(path)
     .then(function (data) {
       res.send({
@@ -117,21 +109,19 @@ exports.AddHits = async (req, res) => {
     .catch(function (err) {
       res.send({
         errno: err.errno,
-        msg: '读取目录失败',
+        msg: '更新失败',
       })
     })
 }
 
 // 获取插图
 // exports.getFileIllustration = (req, res) => {
-//   // console.log(req)
 //   const fileName = req.params.fileName
 //   const imgName = req.params.imgName
 //   const url = `${PAPERS_PATH}/${fileName}/${imgName}`
 //   res.setHeader("Content-Type", CONTENT_TYPE);
 //   fs.readFile(url, 'binary', function(err, dataStr){
 //     if(err){
-//       // console.log(err)
 //       res.send({
 //         errno: err.errno,
 //         msg: '图片缺失'

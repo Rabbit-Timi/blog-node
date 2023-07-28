@@ -3,7 +3,7 @@ const cors = require('cors') // 将 cors 注册为全局中间件
 const fileRouter = require('./router/file')
 const updateData = require('./router/updateData')
 const { PAPERS_ILLUSTRATION_PATH, LOGO_PATH } = require('./constant/index.js')
-const {BASEURL} = require('./app/config.js')
+const { BASEURL } = require('./app/config.js')
 
 const app = express()
 
