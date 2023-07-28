@@ -66,7 +66,7 @@ function getFileContent(fileName) {
 
 // 读取Tags
 
-function getTagsByPath(path){
+function getTagsByPath(path) {
   const pathArray = path.split('/').filter(a => a != '')
   return new Promise(function (resolve, reject) {
     fs.readFile(DIRECTORY_PATH, function (err, data) {
@@ -75,14 +75,15 @@ function getTagsByPath(path){
         reject(err)
       } else {
         const tagDir = []
-        
+
         data.forEach(d => {
           const dFilePathArray = d.filePath.split('/').filter(a => a != '')
-          if(path
-              && d.filePath.startsWith(path)
-              && d.type === 'directory'
-              && dFilePathArray.length - 1 === pathArray.length
-            ){
+          if (
+            path &&
+            d.filePath.startsWith(path) &&
+            d.type === 'directory' &&
+            dFilePathArray.length - 1 === pathArray.length
+          ) {
             tagDir.push(d)
           }
         })
@@ -93,7 +94,7 @@ function getTagsByPath(path){
 }
 
 // 读取文件列表
-function getFileListByPath(path = ''){
+function getFileListByPath(path = '') {
   // console.log(path)
   return new Promise(function (resolve, reject) {
     fs.readFile(DIRECTORY_PATH, function (err, data) {
@@ -102,22 +103,21 @@ function getFileListByPath(path = ''){
         reject(err)
       } else {
         let fileList = []
-        
+
         data.forEach(d => {
-          if(d.filePath.startsWith(path) && d.type === '.md'
-            ){
-              fileList.push(d)
+          if (d.filePath.startsWith(path) && d.type === '.md') {
+            fileList.push(d)
           }
         })
-        
-        resolve({fileList, total: fileList.length})
+
+        resolve({ fileList, total: fileList.length })
       }
     })
   })
 }
 
 // 浏览量
-function addFilePageHits(path){
+function addFilePageHits(path) {
   // console.log('path:', path)
   // const cwd = process.cwd()
   // console.log('cwd:',cwd)
@@ -125,14 +125,14 @@ function addFilePageHits(path){
     // console.time('read')
     let data = fs.readFileSync(DIRECTORY_PATH)
     // console.timeEnd('read')
-    if(data) {
+    if (data) {
       data = JSON.parse(data)
-        for(let i = 0; i < data.length; i++){
-          if(data[i].filePath === path) {
-            data[i].hitsCount++
-            break
-          }
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].filePath === path) {
+          data[i].hitsCount++
+          break
         }
+      }
     }
     // console.time('write')
     fs.writeFile(DIRECTORY_PATH, JSON.stringify(data), function (err) {
@@ -153,5 +153,5 @@ module.exports = {
   getFileContent,
   getTagsByPath,
   getFileListByPath,
-  addFilePageHits
+  addFilePageHits,
 }
