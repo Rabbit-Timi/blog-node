@@ -11,7 +11,7 @@ function DFSDir(dir, paper_path, res) {
     const pathStr = paper_path + '/' + dirArray[i]
     const stats = fs.statSync(pathStr)
     const filePath = pathStr.slice(papersPathLen, pathStr.length)
-    if(stats.isDirectory()){
+    if(stats.isDirectory() && dirArray[i] !== '.git'){
       // 添加文件夹
       if(!pathStr.includes(PAPERS_ILLUSTRATION_PATH)) {
         const temp = {
