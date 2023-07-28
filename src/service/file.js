@@ -129,16 +129,24 @@ function addFilePageHits(path) {
       //   console.log(`${DIRECTORY_PATH} ${err ? '不可写' : '可写'}`)
       // })
       data = JSON.stringify(data)
-      setTimeout(() => {
-        fs.writeFile(DIRECTORY_PATH, data, function (err) {
-          console.log(err)
-          if (err) {
-            reject(err)
-          } else {
-            resolve({ msg: '更新成功' })
-          }
-        })
-      }, 1000)
+      // setTimeout(() => {
+      //   fs.writeFile(DIRECTORY_PATH, data, function (err) {
+      //     console.log(err)
+      //     if (err) {
+      //       reject(err)
+      //     } else {
+      //       resolve({ msg: '更新成功' })
+      //     }
+      //   })
+      // }, 1000)
+      fs.writeFile(DIRECTORY_PATH, data, function (err) {
+        console.log(err)
+        if (err) {
+          reject(err)
+        } else {
+          resolve({ msg: '更新成功' })
+        }
+      })
     }
   })
 }
