@@ -10,13 +10,14 @@ npm run dev
 + **服务器地址 & md文件跟目录** src -> app -> config.js
 + **路径常量** src -> constant -> index.js
 
-## 3. public文件夹结构
+## 3. public文件夹结构（与项目同级, 用于存放文章很文章相关数据）
 
 ![目录结构](public/public.png)
 
 + Logo/LOGO.jpg 首页头像
 + papers md文件 & 插图
   + papers/illustration 图片
++ directory.json 文件目录结构数据
 
 > papers 内文件夹代表分类(可嵌套)  .md 文件代表文章
 

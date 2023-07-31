@@ -127,7 +127,7 @@ function addFilePageHits(filePath) {
       }
       data = JSON.stringify(data)
       fs.writeFile(DIRECTORY_PATH, data, function (err) {
-        console.log(err)
+        // console.log(err)
         if (err) {
           reject(err)
         } else {
