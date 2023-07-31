@@ -22,21 +22,11 @@ exports.updateDirectoryTree = async (req, res) => {
 
 // 更新文章
 exports.webHookPapersFile = async (req, res) => {
-  let header = {}
-  for (let i = 0; i < req.rawHeaders.length; i += 2) {
-    header = {
-      ...header,
-      ...{
-        [req.rawHeaders[i]]: req.rawHeaders[i + 1],
-      },
-    }
-  }
-  console.log(req.headers, req.get('X-Hub-Signature'))
-  const sign = header['X-Hub-Signature'] //输出为：sha1=${secret的加密字符串}
-  const event = header['X-GitHub-Event'] //输出为：事件名称(push)
-  // const commitID = header['X-GitHub-Delivery'] //输出为：commitID
+  // console.log(req.headers, req.get('X-Hub-Signature'))
+  const sign = req.get('X-Hub-Signature') //输出为：sha1=${secret的加密字符串}
+  const event = req.get('X-GitHub-Event') //输出为：事件名称(push)
   if (event == 'push') {
-    console.log(req.body)
+    // console.log(req.body)
     // 根据请求的body和secret计算sha1的值
     const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN)
     console.log(hmac)
@@ -44,22 +34,17 @@ exports.webHookPapersFile = async (req, res) => {
     const signature = 'sha1=' + hmac.digest('hex') //用这个跟sign对比
     console.log(signature)
     // 可在此验证sign真伪
-    // if(signature == sign){
-    //   let cwd = process.cwd()
-    //   runCmd('sh', [path.join(cwd,'scripts/pullClover.sh')], function(res){
-    //     console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
-    //     saveDirectoryTree()
-    //   });
-    // }
-    let cwd = process.cwd()
-    runCmd('sh', [path.join(cwd, 'scripts/pullClover.sh')], function (res) {
-      console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
-      saveDirectoryTree()
-    })
+    if (signature == sign) {
+      let cwd = process.cwd()
+      runCmd('sh', [path.join(cwd, 'scripts/pullClover.sh')], function (res) {
+        console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
+        saveDirectoryTree()
+      })
+    }
   }
   res.send({
     errno: 0,
-    msg: 'hello world',
+    msg: '更新成功',
   })
   // body = { message:'hello, github' }
 }
