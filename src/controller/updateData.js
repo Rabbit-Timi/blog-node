@@ -1,6 +1,6 @@
 const { saveDirectoryTree } = require('../service/updateData')
-// const { GIT_WEBHOOK_TOKEN } = require('../constant/index')
-// const crypto = require('crypto')
+const { GIT_WEBHOOK_TOKEN } = require('../constant/index')
+const crypto = require('crypto')
 const path = require('path')
 
 // 更新存储目录树
@@ -31,16 +31,18 @@ exports.webHookPapersFile = async (req, res) => {
       },
     }
   }
+  console.log(req.header)
   const sign = header['X-Hub-Signature'] //输出为：sha1=${secret的加密字符串}
   const event = header['X-GitHub-Event'] //输出为：事件名称(push)
   // const commitID = header['X-GitHub-Delivery'] //输出为：commitID
   if (event == 'push') {
     console.log(req.body)
     // 根据请求的body和secret计算sha1的值
-    // const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN);
-    // console.log(hmac)
-    // hmac.update(JSON.stringify(req.body)); //req.body时github传过来的post数据(跟request.body一样的)
-    // const signature = 'sha1=' + hmac.digest('hex'); //用这个跟sign对比
+    const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN)
+    console.log(hmac)
+    hmac.update(JSON.stringify(req.body)) //req.body时github传过来的post数据(跟request.body一样的)
+    const signature = 'sha1=' + hmac.digest('hex') //用这个跟sign对比
+    console.log(signature)
     // 可在此验证sign真伪
     // if(signature == sign){
     //   let cwd = process.cwd()
