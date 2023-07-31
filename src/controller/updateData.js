@@ -34,7 +34,7 @@ exports.webHookPapersFile = async (req, res) => {
     if (signature == sign) {
       // console.log(signature == sign)
       let cwd = process.cwd()
-      const shPath = path.join(cwd, 'scripts/pullClover.sh')
+      const shPath = path.join(cwd, 'scripts/pull.sh')
       console.log(shPath)
       runCmd('sh', [shPath], function (res) {
         console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
