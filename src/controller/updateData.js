@@ -30,9 +30,9 @@ exports.webHookPapersFile = async (req, res) => {
     const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN)
     hmac.update(JSON.stringify(req.body)) //req.body时github传过来的post数据(跟request.body一样的)
     const signature = 'sha1=' + hmac.digest('hex') //用这个跟sign对比
-    console.log(signature, sign)
     // 可在此验证sign真伪
     if (signature == sign) {
+      console.log(signature == sign)
       let cwd = process.cwd()
       runCmd('sh', [path.join(cwd, 'scripts/pullClover.sh')], function (res) {
         console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
