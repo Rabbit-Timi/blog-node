@@ -32,9 +32,11 @@ exports.webHookPapersFile = async (req, res) => {
     const signature = 'sha1=' + hmac.digest('hex') //用这个跟sign对比
     // 可在此验证sign真伪
     if (signature == sign) {
-      console.log(signature == sign)
+      // console.log(signature == sign)
       let cwd = process.cwd()
-      runCmd('sh', [path.join(cwd, 'scripts/pullClover.sh')], function (res) {
+      const shPath = path.join(cwd, 'scripts/pullClover.sh')
+      console.log(shPath)
+      runCmd('sh', shPath, function (res) {
         console.log(res) //res返回的是shell命令操作后在命令行终端显示的字符串，这里是一些git操作的提示
         saveDirectoryTree()
       })
