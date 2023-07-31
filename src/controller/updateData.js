@@ -31,7 +31,7 @@ exports.webHookPapersFile = async (req, res) => {
       },
     }
   }
-  console.log(req.header)
+  console.log(req.headers, req.get('X-Hub-Signature'))
   const sign = header['X-Hub-Signature'] //输出为：sha1=${secret的加密字符串}
   const event = header['X-GitHub-Event'] //输出为：事件名称(push)
   // const commitID = header['X-GitHub-Delivery'] //输出为：commitID
