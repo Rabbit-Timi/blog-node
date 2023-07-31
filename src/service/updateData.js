@@ -9,6 +9,23 @@ function saveDirectoryTree() {
   const dir = []
   const res = []
   DFSDir(dir, PAPERS_PATH, res)
+  try {
+    fs.accessSync(DIRECTORY_PATH, fs.constants.F_OK)
+    let data = fs.readFileSync(DIRECTORY_PATH, 'utf-8')
+    data = JSON.parse(data)
+    if (data) {
+      for (let i = 0; i < res.length; i++) {
+        for (let j = 0; j < data.length; j++) {
+          if (res[i].type == '.md' && res[i].filePath == data[j].filePath) {
+            res[i].hitsCount = res[i].hitsCount + data[j].hitsCount
+          }
+        }
+      }
+    }
+    console.log('can access')
+  } catch (err) {
+    console.error('no access!')
+  }
   return new Promise(function (resolve, reject) {
     fs.writeFile(DIRECTORY_PATH, JSON.stringify(res), function (err) {
       // console.log(err)

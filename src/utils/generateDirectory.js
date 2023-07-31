@@ -2,7 +2,14 @@ const fs = require('fs')
 const path = require('path')
 const { PAPERS_PATH, PAPERS_ILLUSTRATION_PATH } = require('../constant/index.js')
 
-// 文件目录生成
+/**
+ * @Author: timmtiy
+ * @description: 文件目录生成
+ * @param {*} dir 文章目录树形结构
+ * @param {*} paper_path 文章路径
+ * @param {*} res 结果数组
+ * @return {*}
+ */
 function DFSDir(dir, paper_path, res) {
   const papersPathLen = PAPERS_PATH.length
   const dirArray = fs.readdirSync(paper_path)
