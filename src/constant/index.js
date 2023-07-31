@@ -3,7 +3,7 @@
  * @Author: timmtiy
  * @Date: 2023-05-30 18:29:44
  * @LastEditors: timmtiy
- * @LastEditTime: 2023-07-28 16:22:20
+ * @LastEditTime: 2023-07-31 13:07:30
  */
 
 const { BASE_PATH } = require('../app/config.js')
@@ -13,9 +13,8 @@ exports.PAPERS_PATH = `${BASE_PATH}/papers`
 exports.PAPERS_ILLUSTRATION_PATH = `${BASE_PATH}/papers/illustration`
 exports.LOGO_PATH = `${BASE_PATH}/Logo`
 
-// 生成数据地址
-const base_path = __dirname.slice(0, __dirname.length - 9)
-exports.DIRECTORY_PATH = `${base_path}/data/directory.json`
+// // 生成数据地址
+exports.DIRECTORY_PATH = `${BASE_PATH}/directory.json`
 // exports.PAGE_HITS_PATH = `${base_path}/data/page_hits.json`
 
 // git webhook token

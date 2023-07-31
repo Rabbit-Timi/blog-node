@@ -63,8 +63,8 @@ function getFileContent(fileName) {
 
 // 读取Tags
 
-function getTagsByPath(path) {
-  const pathArray = path.split('/').filter(a => a != '')
+function getTagsByPath(filePath) {
+  const pathArray = filePath.split('/').filter(a => a != '')
   return new Promise(function (resolve, reject) {
     fs.readFile(DIRECTORY_PATH, function (err, data) {
       data = JSON.parse(data)
@@ -76,8 +76,8 @@ function getTagsByPath(path) {
         data.forEach(d => {
           const dFilePathArray = d.filePath.split('/').filter(a => a != '')
           if (
-            path &&
-            d.filePath.startsWith(path) &&
+            filePath &&
+            d.filePath.startsWith(filePath) &&
             d.type === 'directory' &&
             dFilePathArray.length - 1 === pathArray.length
           ) {
@@ -91,7 +91,7 @@ function getTagsByPath(path) {
 }
 
 // 读取文件列表
-function getFileListByPath(path = '') {
+function getFileListByPath(filePath = '') {
   return new Promise(function (resolve, reject) {
     fs.readFile(DIRECTORY_PATH, function (err, data) {
       data = JSON.parse(data)
@@ -101,7 +101,7 @@ function getFileListByPath(path = '') {
         let fileList = []
 
         data.forEach(d => {
-          if (d.filePath.startsWith(path) && d.type === '.md') {
+          if (d.filePath.startsWith(filePath) && d.type === '.md') {
             fileList.push(d)
           }
         })
@@ -113,32 +113,19 @@ function getFileListByPath(path = '') {
 }
 
 // 浏览量
-function addFilePageHits(path) {
+function addFilePageHits(filePath) {
   return new Promise(function (resolve, reject) {
     let data = fs.readFileSync(DIRECTORY_PATH, 'utf-8')
+    // console.log(data)
     data = JSON.parse(data)
     if (data) {
       for (let i = 0; i < data.length; i++) {
-        if (data[i].filePath === path) {
+        if (data[i].filePath === filePath) {
           data[i].hitsCount++
           break
         }
       }
-      // 查看文件夹是否可写
-      // fs.access(DIRECTORY_PATH, fs.constants.W_OK, err => {
-      //   console.log(`${DIRECTORY_PATH} ${err ? '不可写' : '可写'}`)
-      // })
       data = JSON.stringify(data)
-      // setTimeout(() => {
-      //   fs.writeFile(DIRECTORY_PATH, data, function (err) {
-      //     console.log(err)
-      //     if (err) {
-      //       reject(err)
-      //     } else {
-      //       resolve({ msg: '更新成功' })
-      //     }
-      //   })
-      // }, 1000)
       fs.writeFile(DIRECTORY_PATH, data, function (err) {
         console.log(err)
         if (err) {

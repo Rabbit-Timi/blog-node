@@ -96,7 +96,8 @@ exports.getFileList = async (req, res) => {
 
 // 浏览量
 exports.AddHits = async (req, res) => {
-  const path = req.query.path
+  console.log(req.body)
+  const path = req.body.path
   await addFilePageHits(path)
     .then(function (data) {
       res.send({

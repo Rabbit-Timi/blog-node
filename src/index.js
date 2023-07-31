@@ -7,6 +7,10 @@ const { BASEURL } = require('./app/config.js')
 
 const app = express()
 
+app.use(express.urlencoded({ extended: false }))
+// 解析post请求application/json,格式
+app.use(express.json())
+
 // 路由请求超时的中间件
 // app.use(function (req, res, next) {
 //     // 这里必须是Response响应的定时器
@@ -17,6 +21,7 @@ const app = express()
 //     next()
 // })
 
+// 解决跨域
 app.use(cors())
 
 app.use('/api', fileRouter)
