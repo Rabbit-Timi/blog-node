@@ -26,13 +26,11 @@ exports.webHookPapersFile = async (req, res) => {
   const sign = req.get('X-Hub-Signature') //输出为：sha1=${secret的加密字符串}
   const event = req.get('X-GitHub-Event') //输出为：事件名称(push)
   if (event == 'push') {
-    // console.log(req.body)
     // 根据请求的body和secret计算sha1的值
     const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN)
-    console.log(hmac)
     hmac.update(JSON.stringify(req.body)) //req.body时github传过来的post数据(跟request.body一样的)
     const signature = 'sha1=' + hmac.digest('hex') //用这个跟sign对比
-    console.log(signature)
+    console.log(signature, sign)
     // 可在此验证sign真伪
     if (signature == sign) {
       let cwd = process.cwd()
