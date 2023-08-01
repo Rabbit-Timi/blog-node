@@ -22,7 +22,4 @@ router.get('/file/getFileList', fileHandler.getFileList)
 // 文章浏览量增加
 router.post('/file/hits', fileHandler.AddHits)
 
-// 获取md文件图片
-// router.get('/file/getFileIllustration/:fileName/:imgName', fileHandler.getFileIllustration)
-
 module.exports = router

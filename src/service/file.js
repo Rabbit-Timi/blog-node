@@ -101,7 +101,7 @@ function getTagsByPath(filePath) {
 }
 
 // 读取文件列表
-function getFileListByPath(filePath = '') {
+function getFileListByPath(filePath = '', searchParam = '') {
   return new Promise(function (resolve, reject) {
     try {
       fs.accessSync(DIRECTORY_PATH, fs.constants.F_OK)
@@ -114,7 +114,9 @@ function getFileListByPath(filePath = '') {
 
           data.forEach(d => {
             if (d.filePath.startsWith(filePath) && d.type === '.md') {
-              fileList.push(d)
+              if (d.name.includes(searchParam)) {
+                fileList.push(d)
+              }
             }
           })
 

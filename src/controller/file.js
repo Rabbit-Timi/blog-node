@@ -69,10 +69,11 @@ exports.getTags = async (req, res) => {
 
 // 读取文件列表
 exports.getFileList = async (req, res) => {
-  const fileList_path = req.query.path
-  const pageSize = req.query.pageSize
-  const pageNum = req.query.pageNum
-  await getFileListByPath(fileList_path)
+  const { path: fileList_path, pageSize, pageNum, searchParam } = req.query
+  // const fileList_path = req.query.path
+  // const pageSize = req.query.pageSize
+  // const pageNum = req.query.pageNum
+  await getFileListByPath(fileList_path, searchParam)
     .then(function (data) {
       const { fileList, total } = data
       const start = pageSize * (pageNum - 1)
@@ -114,28 +115,3 @@ exports.AddHits = async (req, res) => {
       })
     })
 }
-
-// 获取插图
-// exports.getFileIllustration = (req, res) => {
-//   const fileName = req.params.fileName
-//   const imgName = req.params.imgName
-//   const url = `${PAPERS_PATH}/${fileName}/${imgName}`
-//   res.setHeader("Content-Type", CONTENT_TYPE);
-//   fs.readFile(url, 'binary', function(err, dataStr){
-//     if(err){
-//       res.send({
-//         errno: err.errno,
-//         msg: '图片缺失'
-//       })
-//     } else {
-//       res.send({
-//         errno: 0,
-//         data: {
-//           fileName,
-//           imgName,
-//           src: dataStr,
-//         }
-//       })
-//     }
-//   })
-// }
