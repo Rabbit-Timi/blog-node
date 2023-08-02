@@ -1,12 +1,16 @@
 #!/bin/bash
 
-# target folder: 与整个项目同级的public
-cd ../public/papers || mkdir '../public/papers'
+if [ -d "../public/papers" ];then
+  echo "/public/papers文件夹存在"
+  cd ../public/papers
+else
+  echo "文件夹不存在"
+  mkdir '../public/papers'
+  # init
+  git init
+  # clone 到本地
+  git remote add origin git@github.com:Rabbit-Timi/blog-papers.git
+fi
 
-# init
-git init
-
-# clone 到本地
-git remote add origin git@github.com:Rabbit-Timi/blog-papers.git
 git pull
 git checkout -b main origin/main
