@@ -1,7 +1,13 @@
 // 运行shell
-exports.runCmd = (cmd, args, callback) => {
+exports.runCmd = (cmd, args = [], callback) => {
   const spawn = require('child_process').spawn
-  const child = spawn(cmd, args)
+  let child
+  if (args) {
+    child = spawn(cmd, args)
+  } else {
+    child = spawn(cmd)
+  }
+
   let res = ''
 
   child.stdout.on('data', function (buffer) {
