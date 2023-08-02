@@ -6,6 +6,7 @@ const { PAPERS_ILLUSTRATION_PATH, LOGO_PATH } = require('./constant/index.js')
 const { BASEURL } = require('./app/config.js')
 const { runCmd } = require('./utils/runCmd')
 const path = require('path')
+const { saveDirectoryTree } = require('./service/updateData')
 
 const app = express()
 
@@ -36,8 +37,8 @@ app.use('/Logo', express.static(LOGO_PATH))
 function GitClone() {
   let cwd = process.cwd()
   const shPath = path.join(cwd, 'scripts/clone.sh')
-  runCmd('sh', [shPath], function (res) {
-    console.log(res)
+  runCmd('sh', [shPath], function () {
+    saveDirectoryTree()
     console.log('end execute')
   })
 }
