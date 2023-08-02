@@ -22,12 +22,12 @@ npm run dev
 
 ![目录结构](public/public.png)
 
-+ Logo/LOGO.jpg 首页头像
-+ papers md文件 & 插图
-  + papers/illustration 图片
-+ directory.json 文件目录结构数据
++ Logo/LOGO.jpg 首页头像 (需要自己手动创建上传)
++ *papers* md文件 & 插图
+  + *papers/illustration* 图片
++ *directory.json* 文件目录结构数据
 
-> papers 内文件夹代表分类(可嵌套)  .md 文件代表文章
+> *papers* 其文件夹内的文件夹代表分类(可嵌套)、 .md 文件代表文章。
 
 ## 4. github webhook
 + 文件存放在 github 上，通过 github 提供的 webhook 触发后端执行 scripts/pull.sh 文件。将文件拉取到服务器指定位置(参见 2 中配置)。
