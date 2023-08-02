@@ -1,5 +1,6 @@
 const { saveDirectoryTree } = require('../service/updateData')
 const { GIT_WEBHOOK_TOKEN } = require('../constant/index')
+const runCmd = require('../utils/runCmd')
 const crypto = require('crypto')
 const path = require('path')
 
@@ -25,13 +26,13 @@ exports.webHookPapersFile = async (req, res) => {
   // console.log(req.headers, req.get('X-Hub-Signature'))
   const sign = req.get('X-Hub-Signature') //输出为：sha1=${secret的加密字符串}
   const event = req.get('X-GitHub-Event') //输出为：事件名称(push)
-  if (event == 'push') {
+  if (event === 'push') {
     // 根据请求的body和secret计算sha1的值
     const hmac = crypto.createHmac('sha1', GIT_WEBHOOK_TOKEN)
     hmac.update(JSON.stringify(req.body)) //req.body时github传过来的post数据(跟request.body一样的)
     const signature = 'sha1=' + hmac.digest('hex') //用这个跟sign对比
     // 可在此验证sign真伪
-    if (signature == sign) {
+    if (signature === sign) {
       // console.log(signature == sign)
       let cwd = process.cwd()
       const shPath = path.join(cwd, 'scripts/pull.sh')
@@ -47,18 +48,4 @@ exports.webHookPapersFile = async (req, res) => {
     msg: '更新成功',
   })
   // body = { message:'hello, github' }
-}
-
-// 运行shell
-function runCmd(cmd, args, callback) {
-  const spawn = require('child_process').spawn
-  const child = spawn(cmd, args)
-  let res = ''
-
-  child.stdout.on('data', function (buffer) {
-    res += buffer.toString()
-  })
-  child.stdout.on('end', function () {
-    callback(res)
-  })
 }

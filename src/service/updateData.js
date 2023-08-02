@@ -16,7 +16,7 @@ function saveDirectoryTree() {
     if (data) {
       for (let i = 0; i < res.length; i++) {
         for (let j = 0; j < data.length; j++) {
-          if (res[i].type == '.md' && res[i].filePath == data[j].filePath) {
+          if (res[i].type === '.md' && res[i].filePath === data[j].filePath) {
             res[i].hitsCount = res[i].hitsCount + data[j].hitsCount
           }
         }

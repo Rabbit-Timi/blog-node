@@ -3,7 +3,8 @@ const cors = require('cors') // 将 cors 注册为全局中间件
 const fileRouter = require('./router/file')
 const updateData = require('./router/updateData')
 const { PAPERS_ILLUSTRATION_PATH, LOGO_PATH } = require('./constant/index.js')
-const { BASEURL } = require('./app/config.js')
+const { BASEURL, BLOG_GIT_URL } = require('./app/config.js')
+const runCmd = require('./utils/runCmd')
 
 const app = express()
 
@@ -30,6 +31,13 @@ app.use(updateData)
 app.use('/illustration', express.static(PAPERS_ILLUSTRATION_PATH))
 
 app.use('/Logo', express.static(LOGO_PATH))
+
+function GitClone() {
+  runCmd('git clone ' + BLOG_GIT_URL + ' ../public/papers', () => {
+    console.log('end execute')
+  })
+}
+GitClone()
 
 const server = app.listen(8888, () => {
   console.log(BASEURL)
