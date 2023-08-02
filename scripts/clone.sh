@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # target folder: 与整个项目同级的public
-cd ../public/papers || mkdir '../public/papers'
+cd ../public || mkdir '../public'
 
 # init
 git init

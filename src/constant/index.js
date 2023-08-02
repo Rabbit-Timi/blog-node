@@ -3,22 +3,19 @@
  * @Author: timmtiy
  * @Date: 2023-05-30 18:29:44
  * @LastEditors: timmtiy
- * @LastEditTime: 2023-07-31 13:07:30
+ * @LastEditTime: 2023-08-02 11:43:23
  */
 
-const { BASE_PATH } = require('../app/config.js')
+const { BASE_PATH, BLOG_PAPERS_REPOSITORY_NAME } = require('../app/config.js')
 
 // 资源地址
-exports.PAPERS_PATH = `${BASE_PATH}/papers`
-exports.PAPERS_ILLUSTRATION_PATH = `${BASE_PATH}/papers/illustration`
+exports.PAPERS_PATH = `${BASE_PATH}/${BLOG_PAPERS_REPOSITORY_NAME}`
+exports.PAPERS_ILLUSTRATION_PATH = `${BASE_PATH}/${BLOG_PAPERS_REPOSITORY_NAME}/illustration`
 exports.LOGO_PATH = `${BASE_PATH}/Logo`
 
 // // 生成数据地址
 exports.DIRECTORY_PATH = `${BASE_PATH}/directory.json`
 // exports.PAGE_HITS_PATH = `${base_path}/data/page_hits.json`
-
-// git webhook token
-exports.GIT_WEBHOOK_TOKEN = '318a1115ba5b1bb46ec4f984b4db6ec152c6b0fe'
 
 exports.CONTENT_TYPE = {
   css: 'text/css',

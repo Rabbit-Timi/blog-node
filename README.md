@@ -33,5 +33,5 @@ npm run dev
 + 文件存放在 github 上，通过 github 提供的 webhook 触发后端执行 scripts/pull.sh 文件。将文件拉取到服务器指定位置(参见 2 中配置)。
 + github webhook 配置
   + 访问接口为 http://服务器地址/webhook
-  + Secret 中输入自己的密钥 可通过在终端输入 ruby -rsecurerandom -e 'puts SecureRandom.hex(20)' 生成一个高墒字符串。同时将该密钥配置至 src -> constant -> config.js 的 GIT_WEBHOOK_TOKEN
+  + Secret 中输入自己的密钥 可通过在终端输入 ruby -rsecurerandom -e 'puts SecureRandom.hex(20)' 生成一个高墒字符串。同时将该密钥配置至 src -> app -> config.js 的 GIT_WEBHOOK_TOKEN
   + ![目录结构](public/webhook.jpg)

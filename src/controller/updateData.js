@@ -1,5 +1,5 @@
 const { saveDirectoryTree } = require('../service/updateData')
-const { GIT_WEBHOOK_TOKEN } = require('../constant/index')
+const { GIT_WEBHOOK_TOKEN } = require('../app/config')
 const { runCmd } = require('../utils/runCmd')
 const crypto = require('crypto')
 const path = require('path')
