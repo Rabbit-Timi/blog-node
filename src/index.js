@@ -4,7 +4,7 @@ const fileRouter = require('./router/file')
 const updateData = require('./router/updateData')
 const { PAPERS_ILLUSTRATION_PATH, LOGO_PATH } = require('./constant/index.js')
 const { BASEURL, BLOG_GIT_URL } = require('./app/config.js')
-const runCmd = require('./utils/runCmd')
+const { runCmd } = require('./utils/runCmd')
 
 const app = express()
 
