@@ -7,4 +7,4 @@ exports.BASEURL = 'http://119.45.167.11:8888'
 // exports.BASEURL = 'http://192.168.31.135:8888'
 
 // 文章git地址
-exports.BLOG_GIT_URL = 'https://github.com/Rabbit-Timi/blog-papers.git'
+// exports.BLOG_GIT_URL = 'https://github.com/Rabbit-Timi/blog-papers.git'
