@@ -18,7 +18,7 @@ npm run dev
 + **常量** src -> constant -> index.js
 + **git 仓库地址** script -> clone.sh
 
-## 3. public文件夹结构（与项目同级, 用于存放文章很文章相关数据）
+## 3. public文件夹结构（与项目同级, 用于存放文章很文章相关数据, 需提前创建好）
 
 ![目录结构](public/public.png)
 
