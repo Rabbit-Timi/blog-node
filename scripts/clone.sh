@@ -4,4 +4,4 @@
 cd ../public/papers || mkdir '../public/papers'
 
 # pull clover
-git clone https://github.com/Rabbit-Timi/blog-papers.git
+git clone git@github.com:Rabbit-Timi/blog-papers.git

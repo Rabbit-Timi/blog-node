@@ -16,6 +16,7 @@ npm run dev
 ## 2. 配置文件
 + **服务器地址 & md文件跟目录** src -> app -> config.js
 + **常量** src -> constant -> index.js
++ **git 仓库地址** script -> clone.sh
 
 ## 3. public文件夹结构（与项目同级, 用于存放文章很文章相关数据）
 
